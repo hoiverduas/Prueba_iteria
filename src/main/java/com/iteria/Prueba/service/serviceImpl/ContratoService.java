@@ -6,6 +6,10 @@ import com.iteria.Prueba.repository.AfiliadoRepository;
 import com.iteria.Prueba.repository.ContratoRepository;
 import com.iteria.Prueba.repository.PlanRepository;
 import com.iteria.Prueba.service.serviceDAO.IContratoService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +25,8 @@ import java.util.NoSuchElementException;
 @Service
 public class ContratoService implements IContratoService {
 
-
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private ContratoRepository contratoRepository;
 
@@ -165,6 +170,13 @@ public class ContratoService implements IContratoService {
             }
         }
         return fechaDevolucion;
+    }
+
+    @Transactional
+    public void updateColumnType() {
+        String sql = "ALTER TABLE contrato ALTER COLUMN pln_id TYPE bigint USING pln_id::bigint";
+        Query query = entityManager.createNativeQuery(sql);
+        query.executeUpdate();
     }
 
 }

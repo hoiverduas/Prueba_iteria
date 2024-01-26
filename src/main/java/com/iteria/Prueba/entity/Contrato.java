@@ -1,9 +1,11 @@
 package com.iteria.Prueba.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.Date;
 
@@ -23,9 +25,10 @@ public class Contrato {
     @JoinColumn(name = "AFI_ID")
     private Afiliado afiliado;
 
+
     @ManyToOne
-    @JoinColumn(name = "pln_id")
     private Plan plan;
+
 
     @Column(name = "CTO_CANTIDAD_USUARIOS")
     private int ctoCantidadUsuarios;
@@ -46,8 +49,9 @@ public class Contrato {
     @Column(name = "TDC_ESTADO")
     private EstadoContrato estadoContrato;
 
+
+
     public void actualizarEstado() {
         this.estadoContrato = EstadoContrato.obtenerEstado(this.ctoFechaRetiro);
     }
-
 }

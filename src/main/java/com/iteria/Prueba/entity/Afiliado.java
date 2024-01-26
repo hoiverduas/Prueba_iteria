@@ -11,8 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "AFILIADO", uniqueConstraints = @UniqueConstraint(columnNames = {"TDC_ID", "AFI_DOCUMENTO"}))
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Afiliado {
 
     @Id
@@ -49,4 +48,19 @@ public class Afiliado {
     @Enumerated(EnumType.ORDINAL)
     private Estado afiEstado;
 
+    public Afiliado(Long afiId, String afiNombre, TipoDocumento tipoDocumento, String afiDocumento, String afiApellidos, String afiDireccion, String afiTelefono, String afiMail, List<Contrato> contratos, Estado afiEstado) {
+        this.afiId = afiId;
+        this.afiNombre = afiNombre;
+        this.tipoDocumento = tipoDocumento;
+        this.afiDocumento = afiDocumento;
+        this.afiApellidos = afiApellidos;
+        this.afiDireccion = afiDireccion;
+        this.afiTelefono = afiTelefono;
+        this.afiMail = afiMail;
+        this.contratos = contratos;
+        this.afiEstado = afiEstado;
+    }
+
+    public Afiliado() {
+    }
 }

@@ -30,7 +30,7 @@ public class Plan {
     @Column(name = "PLN_FECHA_FIN")
     private LocalDate plnFechaFin;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.PERSIST )
     private List<Contrato> contratos;
 
     @Column(name = "PLN_ESTADO")
